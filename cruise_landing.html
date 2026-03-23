@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서부 지중해 크루즈 | MSC Seaview 2026.10.16</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --deep-blue: #0d2447;
+    --ocean: #1a4a7a;
+    --teal: #1e8ca4;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f8f4ed;
+    --white: #ffffff;
+    --text-muted: #8899aa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    background: linear-gradient(180deg, rgba(10,22,40,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; letter-spacing: 2px;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(248,244,237,0.8); font-size: 13px;
+    letter-spacing: 1.5px; text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy);
+    padding: 10px 24px; font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    height: 100vh; position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      linear-gradient(180deg, rgba(10,22,40,0.3) 0%, rgba(10,22,40,0.6) 60%, rgba(10,22,40,1) 100%),
+      url('https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=1800&q=80') center/cover;
+  }
+  .hero-badge {
+    position: relative;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold); font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 8px 24px; margin-bottom: 28px;
+    animation: fadeUp 1s ease both;
+  }
+  .hero h1 {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 96px);
+    font-weight: 900; line-height: 1.05;
+    letter-spacing: -1px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero h1 span { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    position: relative;
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(16px, 2vw, 22px);
+    color: rgba(248,244,237,0.75); margin-top: 20px;
+    letter-spacing: 2px;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .hero-route {
+    position: relative;
+    display: flex; gap: 8px; align-items: center;
+    margin-top: 32px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+  .hero-route .city { font-size: 14px; letter-spacing: 1px; color: var(--cream); }
+  .hero-route .arrow { color: var(--gold); font-size: 12px; }
+  .hero-date-box {
+    position: relative;
+    display: flex; gap: 40px; margin-top: 48px;
+    animation: fadeUp 1s 0.8s ease both;
+  }
+  .hero-date-item { text-align: center; }
+  .hero-date-label { font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+  .hero-date-value { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--gold); }
+  .hero-date-sub { font-size: 11px; color: rgba(248,244,237,0.6); margin-top: 2px; }
+  .hero-divider { width: 1px; background: rgba(248,244,237,0.2); }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeUp 1s 1s ease both;
+  }
+  .hero-scroll span { font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+  .scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%,100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.5); opacity: 0.5; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  .section-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700; line-height: 1.2;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .divider { width: 60px; height: 2px; background: var(--gold); margin: 24px 0 48px; }
+
+  /* ── OVERVIEW ── */
+  .overview {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--deep-blue) 100%);
+  }
+  .overview-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .overview-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 40px;
+  }
+  .stat-box {
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 24px;
+    transition: border-color 0.3s;
+  }
+  .stat-box:hover { border-color: var(--gold); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; font-weight: 900;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-unit { font-size: 16px; }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; letter-spacing: 1px; }
+  .ship-info {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 40px;
+  }
+  .ship-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .ship-sub { color: var(--text-muted); font-size: 13px; margin-bottom: 28px; }
+  .ship-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .spec-item {}
+  .spec-label { font-size: 11px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+  .spec-value { font-size: 18px; font-weight: 600; margin-top: 4px; }
+  .stars { color: var(--gold); font-size: 18px; margin-top: 12px; }
+
+  /* ── SCHEDULE ── */
+  .schedule { background: var(--deep-blue); }
+  .schedule-table { width: 100%; border-collapse: collapse; }
+  .schedule-table thead tr {
+    border-bottom: 2px solid var(--gold);
+  }
+  .schedule-table th {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); padding: 16px 20px; text-align: left;
+  }
+  .schedule-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s;
+  }
+  .schedule-table tbody tr:hover { background: rgba(201,168,76,0.05); }
+  .schedule-table td {
+    padding: 20px; font-size: 14px; color: rgba(248,244,237,0.85);
+  }
+  .day-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold); font-size: 11px;
+    padding: 3px 10px; letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .flag { font-size: 16px; margin-right: 6px; }
+  .sea-badge {
+    display: inline-block;
+    background: rgba(30,140,164,0.2);
+    border: 1px solid rgba(30,140,164,0.4);
+    color: var(--teal); font-size: 12px;
+    padding: 4px 14px;
+  }
+  .time-cell { font-family: monospace; letter-spacing: 1px; font-size: 13px; }
+
+  /* ── FLIGHT ── */
+  .flight-section { background: var(--navy); }
+  .flight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
+  .flight-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 36px;
+    background: rgba(255,255,255,0.03);
+  }
+  .flight-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--gold);
+    margin-bottom: 24px; padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .flight-row {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .flight-row:last-child { border-bottom: none; }
+  .flight-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); margin-top: 5px; flex-shrink: 0;
+  }
+  .flight-row-text { font-size: 14px; line-height: 1.6; color: rgba(248,244,237,0.85); }
+  .flight-row-text strong { color: var(--cream); }
+  .meeting-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+    border: 1px solid var(--gold);
+    padding: 28px 36px;
+    display: flex; gap: 24px; align-items: center;
+    margin-top: 48px;
+  }
+  .meeting-icon { font-size: 36px; }
+  .meeting-label { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .meeting-value { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; }
+
+  /* ── PORTS ── */
+  .ports { background: var(--deep-blue); }
+  .ports-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+  .port-card {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+  }
+  .port-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: brightness(0.7);
+  }
+  .port-card:hover img { transform: scale(1.08); filter: brightness(0.85); }
+  .port-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(10,22,40,0.92) 100%);
+    display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 28px;
+    transition: background 0.4s;
+  }
+  .port-flag { font-size: 24px; margin-bottom: 8px; }
+  .port-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700; line-height: 1.1;
+  }
+  .port-country { font-size: 12px; color: var(--text-muted); margin-top: 4px; letter-spacing: 1px; }
+  .port-date {
+    font-size: 12px; color: var(--gold);
+    margin-top: 8px; letter-spacing: 1px;
+  }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--navy); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 48px; }
+  .price-card {
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 36px 24px; text-align: center;
+    transition: all 0.3s; position: relative;
+    background: rgba(255,255,255,0.02);
+  }
+  .price-card.featured {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.07);
+  }
+  .price-card.featured::before {
+    content: 'BEST';
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: var(--navy);
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    padding: 4px 16px;
+  }
+  .price-card:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+    transform: translateY(-4px);
+  }
+  .price-room { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .price-room-en { font-size: 11px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .price-usd {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1;
+  }
+  .price-usd span { font-size: 18px; }
+  .price-krw { font-size: 14px; color: var(--text-muted); margin-top: 8px; }
+  .price-note { font-size: 11px; color: rgba(248,244,237,0.4); margin-top: 16px; }
+  .pricing-note {
+    text-align: center; margin-top: 32px;
+    font-size: 13px; color: var(--text-muted);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+  }
+
+  /* ── INCLUDES ── */
+  .includes { background: var(--deep-blue); }
+  .includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
+  .include-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 40px;
+  }
+  .include-box.excluded { border-color: rgba(255,255,255,0.1); }
+  .include-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .include-title .check { color: var(--gold); font-size: 18px; margin-right: 8px; }
+  .include-title .cross { color: rgba(255,100,100,0.8); font-size: 18px; margin-right: 8px; }
+  .include-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .include-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; line-height: 1.5; color: rgba(248,244,237,0.85);
+  }
+  .include-list li::before {
+    content: '·'; color: var(--gold); font-size: 20px;
+    line-height: 1.2; flex-shrink: 0;
+  }
+  .excluded .include-list li::before { color: rgba(255,100,100,0.6); }
+
+  /* ── COST ── */
+  .cost-section { background: var(--navy); }
+  .cost-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 48px; max-width: 720px;
+  }
+  .cost-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-label { font-size: 15px; color: rgba(248,244,237,0.8); }
+  .cost-value { font-size: 15px; color: var(--cream); font-weight: 500; text-align: right; }
+  .cost-value small { display: block; font-size: 12px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(
+      135deg,
+      rgba(201,168,76,0.15) 0%,
+      rgba(10,22,40,0) 50%,
+      rgba(26,74,122,0.2) 100%
+    ),
+    var(--deep-blue);
+    text-align: center; padding: 120px 0;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .cta-pre { font-size: 12px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700; line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .cta-title em { color: var(--gold); font-style: italic; }
+  .cta-sub { font-size: 16px; color: var(--text-muted); margin-bottom: 48px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 18px 48px; font-size: 14px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: var(--cream);
+    padding: 18px 48px; font-size: 14px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: 1px solid rgba(248,244,237,0.3); cursor: pointer; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+  .contact-info {
+    margin-top: 56px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+  }
+  .contact-item { text-align: center; }
+  .contact-label { font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+  .contact-value { font-size: 18px; font-weight: 600; color: var(--cream); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060e1a;
+    padding: 40px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--gold);
+    letter-spacing: 2px;
+  }
+  .footer-text { font-size: 12px; color: var(--text-muted); }
+
+  /* MAP SECTION */
+  .map-section { background: var(--deep-blue); padding: 80px 0; }
+  .route-map {
+    width: 100%; max-width: 800px; margin: 48px auto 0;
+    display: block;
+  }
+  .route-svg { width: 100%; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .container { padding: 0 20px; }
+    .overview-grid, .flight-grid, .includes-grid { grid-template-columns: 1fr; }
+    .ports-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .hero-date-box { gap: 20px; }
+    footer { padding: 24px 20px; text-align: center; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">MSC SEAVIEW</a>
+  <ul class="nav-links">
+    <li><a href="#overview">크루즈</a></li>
+    <li><a href="#schedule">일정표</a></li>
+    <li><a href="#ports">기항지</a></li>
+    <li><a href="#pricing">가격</a></li>
+    <li><a href="#includes">포함사항</a></li>
+  </ul>
+  <a class="nav-cta" href="#cta">예약 문의</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge">이탈리아 · 스페인 · 프랑스</div>
+  <h1>서부 지중해<br><span>크루즈</span></h1>
+  <p class="hero-sub">MSC Seaview호 · 8박 11일 · 2026년 10월</p>
+  <div class="hero-route">
+    <span class="city">🇮🇹 로마</span><span class="arrow">→</span>
+    <span class="city">🇮🇹 팔레르모</span><span class="arrow">→</span>
+    <span class="city">🇪🇸 이비자</span><span class="arrow">→</span>
+    <span class="city">🇪🇸 바르셀로나</span><span class="arrow">→</span>
+    <span class="city">🇫🇷 마르세유</span><span class="arrow">→</span>
+    <span class="city">🇮🇹 제노아</span><span class="arrow">→</span>
+    <span class="city">🇮🇹 로마</span>
+  </div>
+  <div class="hero-date-box">
+    <div class="hero-date-item">
+      <div class="hero-date-label">출발</div>
+      <div class="hero-date-value">10.16</div>
+      <div class="hero-date-sub">2026 · 금요일</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-date-item">
+      <div class="hero-date-label">일정</div>
+      <div class="hero-date-value">8박 11일</div>
+      <div class="hero-date-sub">크루즈 7박 8일</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-date-item">
+      <div class="hero-date-label">귀국</div>
+      <div class="hero-date-value">10.26</div>
+      <div class="hero-date-sub">2026 · 월요일</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="overview" id="overview">
+  <div class="container">
+    <div class="overview-grid">
+      <div>
+        <p class="section-label">크루즈 소개</p>
+        <h2 class="section-title">MSC<br><em>Seaview</em></h2>
+        <div class="divider"></div>
+        <p style="font-size:15px; line-height:1.9; color:rgba(248,244,237,0.75);">
+          지중해의 아름다운 기항지를 순항하는 MSC 씨뷰호.
+          로마에서 출발해 시칠리아의 팔레르모, 태양의 섬 이비자,
+          스페인의 보석 바르셀로나, 낭만의 도시 마르세유를 거쳐
+          항구도시 제노아까지 — 지중해의 정수를 만나는 여정입니다.
+        </p>
+        <div class="overview-stats">
+          <div class="stat-box">
+            <div class="stat-num">15<span class="stat-unit">만톤</span></div>
+            <div class="stat-label">선박 톤수</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">323<span class="stat-unit">m</span></div>
+            <div class="stat-label">선박 길이</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">5,400<span class="stat-unit">명</span></div>
+            <div class="stat-label">최대 승객</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">20<span class="stat-unit">층</span></div>
+            <div class="stat-label">선박 규모</div>
+          </div>
+        </div>
+      </div>
+      <div class="ship-info">
+        <div class="stars">★★★★★</div>
+        <div class="ship-name">MSC Seaview</div>
+        <div class="ship-sub">MSC CRUISES · 초대형 럭셔리 크루즈</div>
+        <div class="ship-specs">
+          <div class="spec-item">
+            <div class="spec-label">승무원</div>
+            <div class="spec-value">1,400명</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">크루즈 일정</div>
+            <div class="spec-value">10.18 – 10.25</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">출항지</div>
+            <div class="spec-value">로마 (치비타베키아)</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">왕복 항공</div>
+            <div class="spec-value">에미레이트 EK</div>
+          </div>
+        </div>
+        <div style="margin-top:28px; padding-top:24px; border-top:1px solid rgba(201,168,76,0.2);">
+          <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">모임 장소</div>
+          <div style="font-size:15px; font-weight:600;">인천공항 제1터미널 3층 출국장</div>
+          <div style="font-size:13px; color:var(--gold); margin-top:4px;">10월 16일(금) 19:30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="container">
+    <p class="section-label">상세 일정</p>
+    <h2 class="section-title">여행 <em>일정표</em></h2>
+    <div class="divider"></div>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>날짜</th>
+          <th>지역</th>
+          <th>도착</th>
+          <th>출발</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="day-badge">10/16 금</span></td>
+          <td>🇰🇷 인천 → 두바이 → 🇮🇹 로마</td>
+          <td class="time-cell">–</td>
+          <td class="time-cell">23:55</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/17 토</span></td>
+          <td>✈️ 이동일 (두바이 경유)</td>
+          <td class="time-cell" style="color:var(--gold)">14:15 로마 도착</td>
+          <td class="time-cell">–</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/18 일</span></td>
+          <td>🇮🇹 로마 (치비타베키아) · 크루즈 승선</td>
+          <td class="time-cell">–</td>
+          <td class="time-cell">19:00</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/19 월</span></td>
+          <td><span class="flag">🇮🇹</span>팔레르모 (이탈리아)</td>
+          <td class="time-cell">11:00</td>
+          <td class="time-cell">20:00</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/20 화</span></td>
+          <td><span class="sea-badge">🌊 전일 해상</span></td>
+          <td class="time-cell">–</td>
+          <td class="time-cell">–</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/21 수</span></td>
+          <td><span class="flag">🇪🇸</span>이비자 (스페인)</td>
+          <td class="time-cell">12:30</td>
+          <td class="time-cell">23:00</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/22 목</span></td>
+          <td><span class="flag">🇪🇸</span>바르셀로나 (스페인)</td>
+          <td class="time-cell">09:00</td>
+          <td class="time-cell">19:00</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/23 금</span></td>
+          <td><span class="flag">🇫🇷</span>마르세유 (프랑스)</td>
+          <td class="time-cell">09:00</td>
+          <td class="time-cell">18:00</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/24 토</span></td>
+          <td><span class="flag">🇮🇹</span>제노아 (이탈리아)</td>
+          <td class="time-cell">09:00</td>
+          <td class="time-cell">18:00</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/25 일</span></td>
+          <td>🇮🇹 로마 → 두바이 → 🇰🇷 인천</td>
+          <td class="time-cell">–</td>
+          <td class="time-cell">17:00</td>
+        </tr>
+        <tr>
+          <td><span class="day-badge">10/26 월</span></td>
+          <td>🇰🇷 인천 도착 · 여행 종료</td>
+          <td class="time-cell" style="color:var(--gold)">15:45</td>
+          <td class="time-cell">–</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FLIGHT -->
+<section class="flight-section" id="flight">
+  <div class="container">
+    <p class="section-label">항공 정보</p>
+    <h2 class="section-title">에미레이트 <em>EK</em> 항공</h2>
+    <div class="divider"></div>
+    <div class="flight-grid">
+      <div class="flight-card">
+        <div class="flight-card-title">✈️ 출국 일정</div>
+        <div class="flight-row">
+          <div class="flight-dot"></div>
+          <div class="flight-row-text"><strong>10/16(금) 23:55</strong> 인천 출발</div>
+        </div>
+        <div class="flight-row">
+          <div class="flight-dot"></div>
+          <div class="flight-row-text"><strong>10/17(토) 04:25</strong> 두바이 도착</div>
+        </div>
+        <div class="flight-row">
+          <div class="flight-dot"></div>
+          <div class="flight-row-text"><strong>10/17(토) 09:10</strong> 두바이 출발</div>
+        </div>
+        <div class="flight-row">
+          <div class="flight-dot"></div>
+          <div class="flight-row-text"><strong>10/17(토) 14:15</strong> 로마 도착</div>
+        </div>
+      </div>
+      <div class="flight-card">
+        <div class="flight-card-title">🛬 귀국 일정</div>
+        <div class="flight-row">
+          <div class="flight-dot"></div>
+          <div class="flight-row-text"><strong>10/25(일) 17:00</strong> 로마 출발</div>
+        </div>
+        <div class="flight-row">
+          <div class="flight-dot"></div>
+          <div class="flight-row-text">두바이 경유</div>
+        </div>
+        <div class="flight-row">
+          <div class="flight-dot"></div>
+          <div class="flight-row-text"><strong>10/26(월) 15:45</strong> 인천 도착</div>
+        </div>
+      </div>
+    </div>
+    <div class="meeting-box">
+      <div class="meeting-icon">📍</div>
+      <div>
+        <div class="meeting-label">모임 장소 & 시간</div>
+        <div class="meeting-value">10월 16일(금) 19:30 · 인천공항 제1터미널 3층 출국장</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTS -->
+<section class="ports" id="ports">
+  <div class="container">
+    <p class="section-label">기항지 안내</p>
+    <h2 class="section-title">꿈의 <em>기항지</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="ports-grid">
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80" alt="로마">
+      <div class="port-overlay">
+        <div class="port-flag">🇮🇹</div>
+        <div class="port-name">로마</div>
+        <div class="port-country">ROME · ITALY</div>
+        <div class="port-date">10.17–18 / 10.25 출항</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&q=80" alt="팔레르모">
+      <div class="port-overlay">
+        <div class="port-flag">🇮🇹</div>
+        <div class="port-name">팔레르모</div>
+        <div class="port-country">PALERMO · SICILY</div>
+        <div class="port-date">10.19 · 11:00–20:00</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="이비자">
+      <div class="port-overlay">
+        <div class="port-flag">🇪🇸</div>
+        <div class="port-name">이비자</div>
+        <div class="port-country">IBIZA · SPAIN</div>
+        <div class="port-date">10.21 · 12:30–23:00</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80" alt="바르셀로나">
+      <div class="port-overlay">
+        <div class="port-flag">🇪🇸</div>
+        <div class="port-name">바르셀로나</div>
+        <div class="port-country">BARCELONA · SPAIN</div>
+        <div class="port-date">10.22 · 09:00–19:00</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=600&q=80" alt="마르세유">
+      <div class="port-overlay">
+        <div class="port-flag">🇫🇷</div>
+        <div class="port-name">마르세유</div>
+        <div class="port-country">MARSEILLE · FRANCE</div>
+        <div class="port-date">10.23 · 09:00–18:00</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1609949279531-cf48d64bed89?w=600&q=80" alt="제노아">
+      <div class="port-overlay">
+        <div class="port-flag">🇮🇹</div>
+        <div class="port-name">제노아</div>
+        <div class="port-country">GENOA · ITALY</div>
+        <div class="port-date">10.24 · 09:00–18:00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <p class="section-label">객실 요금</p>
+    <h2 class="section-title">가격 <em>안내</em></h2>
+    <div class="divider"></div>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:0;">2인 1실 기준 / 1인 요금 (항공 별도)</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-room">인사이드</div>
+        <div class="price-room-en">INSIDE</div>
+        <div class="price-usd"><span>$</span>1,200~</div>
+        <div class="price-krw">약 175만원~</div>
+        <div class="price-note">내측 객실</div>
+      </div>
+      <div class="price-card">
+        <div class="price-room">오션뷰</div>
+        <div class="price-room-en">OCEAN VIEW</div>
+        <div class="price-usd"><span>$</span>1,400~</div>
+        <div class="price-krw">약 200만원~</div>
+        <div class="price-note">창문 있는 객실</div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-room">발코니</div>
+        <div class="price-room-en">BALCONY</div>
+        <div class="price-usd"><span>$</span>1,500~</div>
+        <div class="price-krw">약 220만원~</div>
+        <div class="price-note">전용 발코니 포함</div>
+      </div>
+      <div class="price-card">
+        <div class="price-room">스위트</div>
+        <div class="price-room-en">SUITE</div>
+        <div class="price-usd"><span>$</span>2,100~</div>
+        <div class="price-krw">약 295만원~</div>
+        <div class="price-note">최상위 등급</div>
+      </div>
+    </div>
+    <p class="pricing-note">
+      ※ 요트클럽 1인당 $3,000~ 별도 문의 &nbsp;|&nbsp; 항공 약 150~180만원 (에미레이트 EK, 별도) &nbsp;|&nbsp; 투어비 약 200만원 (20명 기준)
+    </p>
+  </div>
+</section>
+
+<!-- INCLUDES -->
+<section class="includes" id="includes">
+  <div class="container">
+    <p class="section-label">상품 구성</p>
+    <h2 class="section-title">포함 / 불포함 <em>사항</em></h2>
+    <div class="divider"></div>
+    <div class="includes-grid">
+      <div class="include-box">
+        <div class="include-title"><span class="check">✔</span> 포함사항</div>
+        <ul class="include-list">
+          <li>로마 호텔 1박 &amp; 시내투어</li>
+          <li>전 일정 기항지 투어</li>
+          <li>크루즈 전문 인솔자 동행</li>
+          <li>유류할증료 및 각종 세금</li>
+          <li>해외여행자 보험</li>
+          <li>크루즈 선상팁</li>
+        </ul>
+      </div>
+      <div class="include-box excluded">
+        <div class="include-title"><span class="cross">✗</span> 불포함사항</div>
+        <ul class="include-list">
+          <li>음료 및 주류</li>
+          <li>선상 와이파이 (선택)</li>
+          <li>가이드 매너팁</li>
+          <li>개인 용돈 &amp; 쇼핑</li>
+          <li>선내 유료 시설 이용료</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <p class="cta-pre">Limited Seats Available</p>
+    <h2 class="cta-title">지금 바로<br><em>예약하세요</em></h2>
+    <p class="cta-sub">1인 여행 시 호텔·크루즈 싱글차지 별도 문의</p>
+    <div class="cta-buttons">
+      <a href="tel:+" class="btn-primary">📞 전화 문의</a>
+      <a href="#" class="btn-secondary">카카오톡 문의</a>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-label">여행 기간</div>
+        <div class="contact-value">2026.10.16 – 10.26</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">크루즈 일정</div>
+        <div class="contact-value">10.18 – 10.25 (7박 8일)</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">선박</div>
+        <div class="contact-value">MSC Seaview</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">항공</div>
+        <div class="contact-value">에미레이트 EK</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MSC SEAVIEW · 서부 지중해 크루즈</div>
+  <div class="footer-text">2026.10.16 – 10.26 &nbsp;|&nbsp; 8박 11일 &nbsp;|&nbsp; 이탈리아 · 스페인 · 프랑스</div>
+</footer>
+
+</body>
+</html>
