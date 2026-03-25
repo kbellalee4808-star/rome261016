@@ -50,11 +50,41 @@ nav {
 .nav-cta { background: var(--navy); color: white; padding: 11px 26px; border-radius: 6px; font-size: var(--fs-sm); font-weight: 700; text-decoration: none; transition: background .2s; white-space: nowrap; }
 .nav-cta:hover { background: var(--gold); color: var(--navy); }
 
-/* HERO */
-.hero { margin-top: 68px; min-height: calc(100vh - 68px); position: relative; display: flex; align-items: center; justify-content: center; padding: 60px clamp(16px,5vw,80px); }
-.hero-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1800&q=85') center/cover no-repeat; }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(160deg,rgba(27,43,75,.80) 0%,rgba(27,43,75,.50) 60%,rgba(0,0,0,.30) 100%); }
-.hero-content { position: relative; z-index: 2; text-align: center; color: white; max-width: 900px; width: 100%; animation: fadeUp .9s ease both; }
+/* HERO - 영상 배경 */
+.hero {
+  margin-top: 68px;
+  min-height: calc(100vh - 68px);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px clamp(16px,5vw,80px);
+  overflow: hidden;
+}
+/* 유튜브 영상 배경 */
+.hero-video-wrap {
+  position: absolute; inset: 0;
+  overflow: hidden; z-index: 0;
+}
+.hero-video-wrap iframe {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 177.78vh; /* 16:9 비율 */
+  height: 100vh;
+  min-width: 100%;
+  min-height: 56.25vw; /* 16:9 비율 */
+  pointer-events: none;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg,rgba(27,43,75,.82) 0%,rgba(27,43,75,.55) 60%,rgba(0,0,0,.35) 100%);
+  z-index: 1;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; color: white;
+  max-width: 900px; width: 100%;
+  animation: fadeUp .9s ease both;
+}
 @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 .hero-eyebrow { font-size: var(--fs-sm); font-weight: 600; letter-spacing: 4px; color: var(--gold-light); margin-bottom: 18px; text-transform: uppercase; }
 .hero-title { font-size: clamp(44px,8vw,72px); font-weight: 700; line-height: 1.1; margin-bottom: 16px; }
@@ -86,7 +116,24 @@ nav {
 .divider { width: 48px; height: 3px; background: var(--gold); margin: 20px 0 28px; }
 
 /* INTRO */
-.intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+
+/* 크루즈 소개 왼쪽: 제목 + 작은 사진 나란히 */
+.intro-text-area { }
+.intro-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 0; }
+.intro-header-left { flex: 1; }
+.intro-thumb {
+  width: 110px; height: 80px;
+  border-radius: 8px; overflow: hidden;
+  flex-shrink: 0; margin-top: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
+  border: 2px solid var(--gold-light);
+}
+.intro-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
 .intro-img-wrap { position: relative; }
 .intro-img-wrap img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; display: block; }
 .img-badge { position: absolute; bottom: -18px; right: -18px; background: var(--gold); color: var(--navy); padding: 18px 22px; text-align: center; border-radius: 4px; }
@@ -209,7 +256,6 @@ nav {
 .agree-text .atitle { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
 .agree-text .adesc { font-size: 13px; color: var(--gray); line-height: 1.6; }
 .agree-text .adesc .red { color: var(--red); font-weight: 700; }
-/* 전체동의 */
 .agree-all { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 6px; border: 2px solid #E5E0D5; cursor: pointer; transition: all .2s; margin-bottom: 14px; background: #F8F6F1; }
 .agree-all.checked { border-color: var(--navy); background: #EEF2FA; }
 .agree-all-chk { width: 22px; height: 22px; min-width: 22px; border: 2px solid #C0B8AC; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: transparent; transition: all .2s; }
@@ -250,12 +296,17 @@ footer strong { color: rgba(255,255,255,.85); }
   .single-price-grid { grid-template-columns: 1fr; }
   .inc-grid { grid-template-columns: 1fr; }
   .cta-meta { grid-template-columns: 1fr; gap: 12px; }
+  .intro-thumb { width: 80px; height: 58px; }
 }
 @media (max-width: 600px) {
   .ports-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
   .sch-table thead th:nth-child(4), .sch-table tbody td:nth-child(4) { display: none; }
   .modal-box { padding: 28px 18px; }
+  .intro-thumb { width: 70px; height: 52px; }
+  /* 모바일에서 영상 배경 폴백 */
+  .hero-video-wrap { display: none; }
+  .hero { background: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=85') center/cover no-repeat; }
 }
 </style>
 </head>
@@ -274,9 +325,17 @@ footer strong { color: rgba(255,255,255,.85); }
   <a href="https://open.kakao.com/o/sbJudavg" target="_blank" class="nav-cta" onclick="openModal(event)">예약 문의</a>
 </nav>
 
-<!-- HERO -->
+<!-- HERO - 유튜브 영상 배경 -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <!-- 유튜브 영상 배경 -->
+  <div class="hero-video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/uqwidWvNxTc?autoplay=1&mute=1&loop=1&playlist=uqwidWvNxTc&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&playsinline=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">2026 · 10.16 — 10.26 · MSC SEAVIEW</p>
@@ -309,16 +368,21 @@ footer strong { color: rgba(255,255,255,.85); }
 <div id="intro">
   <div class="sec">
     <div class="intro-grid">
-      <div class="intro-img-wrap">
-        <img src="msc_seaview.jpg" alt="MSC Seaview 크루즈" style="aspect-ratio:3/2;">
-        <div class="img-badge">
-          <span class="big">★★★★★</span>
-          <span class="small">MSC SEAVIEW</span>
+      <!-- 왼쪽: 텍스트 + 작은 썸네일 -->
+      <div class="intro-text-area">
+        <!-- 크루즈 소개 태그 + 제목 + 작은 사진 나란히 -->
+        <div class="intro-header">
+          <div class="intro-header-left">
+            <span class="sec-tag">크루즈 소개</span>
+            <h2 class="sec-title">MSC <em>Seaview</em></h2>
+          </div>
+          <!-- 오른쪽 작은 썸네일: 유튜브 썸네일 이미지 -->
+          <div class="intro-thumb">
+            <img
+              src="https://img.youtube.com/vi/uqwidWvNxTc/mqdefault.jpg"
+              alt="MSC Seaview 영상 썸네일">
+          </div>
         </div>
-      </div>
-      <div>
-        <span class="sec-tag">크루즈 소개</span>
-        <h2 class="sec-title">MSC <em>Seaview</em></h2>
         <div class="divider"></div>
         <p class="sec-desc">지중해의 아름다운 기항지를 순항하는 MSC 씨뷰호. 로마에서 출발해 시칠리아의 팔레르모, 태양의 섬 이비자, 스페인의 보석 바르셀로나, 낭만의 도시 마르세유를 거쳐 항구도시 제노아까지 — 지중해의 정수를 만나는 여정입니다.</p>
         <div class="specs-grid">
@@ -326,6 +390,14 @@ footer strong { color: rgba(255,255,255,.85); }
           <div class="spec-item"><div class="spec-val">323m</div><div class="spec-label">선박 길이</div></div>
           <div class="spec-item"><div class="spec-val">5,400명</div><div class="spec-label">최대 승객</div></div>
           <div class="spec-item"><div class="spec-val">20층</div><div class="spec-label">선박 규모</div></div>
+        </div>
+      </div>
+      <!-- 오른쪽: 크루즈 이미지 -->
+      <div class="intro-img-wrap">
+        <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80" alt="MSC Seaview 크루즈" style="aspect-ratio:3/2;">
+        <div class="img-badge">
+          <span class="big">★★★★★</span>
+          <span class="small">MSC SEAVIEW</span>
         </div>
       </div>
     </div>
@@ -363,18 +435,12 @@ footer strong { color: rgba(255,255,255,.85); }
     <h2 class="sec-title">꿈의 <em>기항지</em></h2>
   </div>
   <div class="ports-grid" style="margin-top:32px;">
-    <!-- 로마: 콜로세움 -->
     <div class="port-card"><img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=700&q=80" alt="로마"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Italy · 10.17–18</div><div class="port-city">로마</div><div class="port-time">ROME</div></div></div>
-    <!-- 팔레르모: 업로드 사진 -->
-    <div class="port-card"><img src="palermo.jpg" alt="팔레르모"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Sicily · 10.19</div><div class="port-city">팔레르모</div><div class="port-time">PALERMO · 11:00–20:00</div></div></div>
-    <!-- 이비자: 업로드 사진2 (구시가지) -->
-    <div class="port-card"><img src="ibiza2.jpg" alt="이비자"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Spain · 10.21</div><div class="port-city">이비자</div><div class="port-time">IBIZA · 12:30–23:00</div></div></div>
-    <!-- 바르셀로나: 사그라다 파밀리아 -->
+    <div class="port-card"><img src="https://images.unsplash.com/photo-1523365280197-f1783db9fe62?w=700&q=80" alt="팔레르모"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Sicily · 10.19</div><div class="port-city">팔레르모</div><div class="port-time">PALERMO · 11:00–20:00</div></div></div>
+    <div class="port-card"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="이비자"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Spain · 10.21</div><div class="port-city">이비자</div><div class="port-time">IBIZA · 12:30–23:00</div></div></div>
     <div class="port-card"><img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=700&q=80" alt="바르셀로나"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Spain · 10.22</div><div class="port-city">바르셀로나</div><div class="port-time">BARCELONA · 09:00–19:00</div></div></div>
-    <!-- 마르세유: 업로드 사진2 (노트르담+항구) -->
-    <div class="port-card"><img src="marseille2.jpg" alt="마르세유"><div class="port-overlay"></div><div class="port-info"><div class="port-country">France · 10.23</div><div class="port-city">마르세유</div><div class="port-time">MARSEILLE · 09:00–18:00</div></div></div>
-    <!-- 제노아: 업로드 사진 -->
-    <div class="port-card"><img src="genoa.jpg" alt="제노아"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Italy · 10.24</div><div class="port-city">제노아</div><div class="port-time">GENOA · 09:00–18:00</div></div></div>
+    <div class="port-card"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&q=80" alt="마르세유"><div class="port-overlay"></div><div class="port-info"><div class="port-country">France · 10.23</div><div class="port-city">마르세유</div><div class="port-time">MARSEILLE · 09:00–18:00</div></div></div>
+    <div class="port-card"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=700&q=80" alt="제노아"><div class="port-overlay"></div><div class="port-info"><div class="port-country">Italy · 10.24</div><div class="port-city">제노아</div><div class="port-time">GENOA · 09:00–18:00</div></div></div>
   </div>
 </div>
 
@@ -429,7 +495,6 @@ footer strong { color: rgba(255,255,255,.85); }
       <button class="ptab" onclick="showTab('flight2',this)">✈️ 항공</button>
       <button class="ptab" onclick="showTab('ground',this)">🏨 지상비</button>
     </div>
-
     <div class="pricing-panel active" id="tab-cruise">
       <div class="pricing-grid">
         <div class="price-card"><div class="pc-type">Inside</div><div class="pc-name">인사이드</div><div class="pc-price"><span>$</span>1,300~</div><div class="pc-krw">약 195만원~</div><div class="pc-desc">내측 객실<br>창문 없음, 경제적 선택</div></div>
@@ -439,7 +504,6 @@ footer strong { color: rgba(255,255,255,.85); }
       </div>
       <p class="price-note">※ 2인 1실 기준 1인 요금 &nbsp;|&nbsp; 요트클럽 $3,000~ 별도 &nbsp;|&nbsp; 싱글차지 별도 문의</p>
     </div>
-
     <div class="pricing-panel" id="tab-flight2">
       <div class="single-price-grid">
         <div class="sprice-card">
@@ -461,11 +525,10 @@ footer strong { color: rgba(255,255,255,.85); }
             <li><span class="slabel">환불 기준</span><span class="sval">항공사 규정 적용</span></li>
             <li><span class="slabel">변경 수수료</span><span class="sval">항공사별 상이</span></li>
           </ul>
-          <div class="sprice-note">항공권 환불 및 변경은 에티하드 항공사 규정에 따르며, 예약 클래스 및 요금 조건에 따라 다를 수 있습니다. 자세한 내용은 문의 시 안내드립니다.</div>
+          <div class="sprice-note">항공권 환불 및 변경은 에티하드 항공사 규정에 따르며, 예약 클래스 및 요금 조건에 따라 다를 수 있습니다.</div>
         </div>
       </div>
     </div>
-
     <div class="pricing-panel" id="tab-ground">
       <div class="single-price-grid">
         <div class="sprice-card">
@@ -502,18 +565,12 @@ footer strong { color: rgba(255,255,255,.85); }
             <li><span class="slabel">출발 59일 이전부터</span><span class="sval" style="color:var(--red)">지상비 환불 불가</span></li>
           </ul>
           <div class="sprice-note">※ 크루즈 요금은 예약 즉시 변경·환불 불가합니다.<br>※ 인원 변동에 따라 추가 비용이 발생할 수 있습니다.</div>
-          <!-- 상세 환불규정 버튼 -->
           <button onclick="document.getElementById('refundModal').classList.add('open'); document.body.style.overflow='hidden';"
-             style="display:inline-flex; align-items:center; justify-content:center; gap:8px; margin-top:14px;
-                    background:var(--navy); color:white; font-weight:700; font-size:15px;
-                    padding:13px 24px; border-radius:8px; border:none; cursor:pointer; width:100%;
-                    transition:background .2s;">
+             style="display:inline-flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; background:var(--navy); color:white; font-weight:700; font-size:15px; padding:13px 24px; border-radius:8px; border:none; cursor:pointer; width:100%; transition:background .2s;">
             📄 취소 및 환불 규정 상세 보기
           </button>
           <a href="http://pf.kakao.com/_EgXxbb" target="_blank"
-             style="display:inline-flex; align-items:center; gap:8px; margin-top:10px;
-                    background:#FEE500; color:#1a1a1a; font-weight:700; font-size:15px;
-                    padding:13px 24px; border-radius:8px; text-decoration:none; width:100%; justify-content:center;">
+             style="display:inline-flex; align-items:center; gap:8px; margin-top:10px; background:#FEE500; color:#1a1a1a; font-weight:700; font-size:15px; padding:13px 24px; border-radius:8px; text-decoration:none; width:100%; justify-content:center;">
             💬 카카오톡으로 지상비 문의하기
           </a>
         </div>
@@ -531,129 +588,19 @@ footer strong { color: rgba(255,255,255,.85); }
       <div class="inc-card yes"><h3>✔ 포함사항</h3><ul><li>로마 호텔 1박 &amp; 시내투어</li><li>전 일정 기항지 투어</li><li>크루즈 전문 인솔자 동행</li><li>유류할증료 및 각종 세금</li><li>해외여행자 보험</li><li>크루즈 선상팁</li></ul></div>
       <div class="inc-card no"><h3>✗ 불포함사항</h3><ul><li>항공권 (에티하드 EY 별도)</li><li>음료 및 주류</li><li>선상 와이파이 (선택)</li><li>가이드 매너팁</li><li>개인 용돈 &amp; 쇼핑</li><li>선내 유료 시설 이용료</li></ul></div>
     </div>
-
-    <!-- 주의사항 아코디언 -->
     <div style="margin-top:48px;">
       <span class="sec-tag">⚠️ 주의사항</span>
       <h3 style="font-size:var(--fs-xl);font-weight:700;color:var(--navy);margin-bottom:24px;">예약 전 꼭 확인하세요</h3>
       <div style="display:flex;flex-direction:column;gap:8px;" id="cautionList">
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>📌 커뮤니티 동행 상품 안내</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            본 상품은 여행사 상품이 아닌 <strong>커뮤니티 동행 프로그램</strong>입니다. 크루즈 전문가와 연결하여 도움을 드리는 역할을 하며, 일반 여행사 서비스와 다를 수 있습니다.
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>🚢 크루즈 예약 취소·환불 불가</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            크루즈 요금은 <strong style="color:var(--red)">예약 즉시 변경 및 환불이 불가</strong>합니다. 객실 등급, 인원, 일정을 충분히 검토하신 후 신중하게 선택해 주시기 바랍니다.
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>✈️ 항공 및 여행경비 환불 규정</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            <strong>항공</strong>은 항공사 규정에 따라 환불됩니다.<br>
-            <strong>여행경비</strong>는 출발 <strong>60일 전까지 100% 환불</strong> 가능하며, 출발 <strong style="color:var(--red)">59일 이전부터는 환불 불가</strong>합니다.<br>
-            인원 변동에 따라 지상비가 추가될 수 있습니다.
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>🛂 여권 및 영문 이름</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            여권 유효기간이 <strong>6개월 이상</strong> 남아있어야 탑승 가능합니다.<br>
-            예약 시 반드시 <strong>여권과 동일한 영문 이름</strong>으로 등록해주세요. 한글 입력 시 예약에 문제가 생길 수 있습니다.
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>👨‍👩‍👧 미성년자 동반</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            미성년자는 <strong>반드시 성인 보호자와 동반</strong>하셔야 합니다.<br>
-            노약자는 보호자와 함께 동행하셔야 합니다. 예) 80세 이상은 성인 자녀, 미성년자는 성인 보호자 동행
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>⏰ 승선 마감 시간 엄수</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            출발 <strong>1시간 전까지 승선을 완료</strong>해야 합니다. 승선 마감 시간을 넘길 경우 탑승이 불가하며, 이 경우 환불되지 않습니다.<br>
-            모임 시간: <strong>10월 16일(금) 19:30 · 인천공항 제1터미널 3층 출국장</strong>
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>🗺️ 일정 변경 가능성</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            기상 상황, 풍랑, 항구 사정에 따라 <strong>크루즈 선사 권한으로 일정이 변경</strong>될 수 있습니다.<br>
-            기항지 변경·취소 시 환불은 불가하오니 이 점 양해 부탁드립니다.
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>💰 추가 비용 안내</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            아래 항목은 개인 부담입니다:
-            <ul style="margin-top:10px;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:var(--fs-sm);color:var(--gray);">
-              <li>선상팁 (크루즈 선사 규정에 따라 별도 부과)</li>
-              <li>개인 용돈 및 쇼핑</li>
-              <li>음료·주류·선상 와이파이</li>
-              <li>싱글차지 (1인 여행 시 별도 문의)</li>
-              <li>선내 유료 시설 이용료</li>
-              <li>가이드 매너팁</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>🏥 건강 및 보험</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            해외여행자 보험은 상품에 포함되어 있습니다.<br>
-            지병, 임산부, 거동 불편자 등은 <strong>사전에 반드시 고지</strong>해 주세요.<br>
-            크루즈 내 의료 시설 이용 시 별도 비용이 발생할 수 있습니다.
-          </div>
-        </div>
-
-        <div class="caution-item">
-          <button class="caution-btn" onclick="toggleCaution(this)">
-            <span>📦 수하물 반입 금지</span><i>﹀</i>
-          </button>
-          <div class="caution-body">
-            크루즈 선내 반입이 금지된 물품이 있습니다:
-            <ul style="margin-top:10px;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:var(--fs-sm);color:var(--gray);">
-              <li>드론, 전동 킥보드 등 전동 이동수단</li>
-              <li>폭발물·인화성 물질·독성물질</li>
-              <li>도검류·총기류</li>
-              <li>다량의 주류 (와인 1병은 가능)</li>
-              <li>긴 멀티탭 (짧은 것은 가능)</li>
-            </ul>
-          </div>
-        </div>
-
+        <div class="caution-item"><button class="caution-btn" onclick="toggleCaution(this)"><span>📌 커뮤니티 동행 상품 안내</span><i>﹀</i></button><div class="caution-body">본 상품은 여행사 상품이 아닌 <strong>커뮤니티 동행 프로그램</strong>입니다.</div></div>
+        <div class="caution-item"><button class="caution-btn" onclick="toggleCaution(this)"><span>🚢 크루즈 예약 취소·환불 불가</span><i>﹀</i></button><div class="caution-body">크루즈 요금은 <strong style="color:var(--red)">예약 즉시 변경 및 환불이 불가</strong>합니다.</div></div>
+        <div class="caution-item"><button class="caution-btn" onclick="toggleCaution(this)"><span>✈️ 항공 및 여행경비 환불 규정</span><i>﹀</i></button><div class="caution-body"><strong>항공</strong>은 항공사 규정에 따라 환불됩니다.<br><strong>여행경비</strong>는 출발 <strong>60일 전까지 100% 환불</strong> 가능하며, 출발 <strong style="color:var(--red)">59일 이전부터는 환불 불가</strong>합니다.</div></div>
+        <div class="caution-item"><button class="caution-btn" onclick="toggleCaution(this)"><span>🛂 여권 및 영문 이름</span><i>﹀</i></button><div class="caution-body">여권 유효기간이 <strong>6개월 이상</strong> 남아있어야 탑승 가능합니다.</div></div>
+        <div class="caution-item"><button class="caution-btn" onclick="toggleCaution(this)"><span>⏰ 승선 마감 시간 엄수</span><i>﹀</i></button><div class="caution-body">출발 <strong>1시간 전까지 승선을 완료</strong>해야 합니다.<br>모임 시간: <strong>10월 16일(금) 19:30 · 인천공항 제1터미널 3층 출국장</strong></div></div>
+        <div class="caution-item"><button class="caution-btn" onclick="toggleCaution(this)"><span>🗺️ 일정 변경 가능성</span><i>﹀</i></button><div class="caution-body">기상 상황, 풍랑, 항구 사정에 따라 <strong>크루즈 선사 권한으로 일정이 변경</strong>될 수 있습니다.</div></div>
+        <div class="caution-item"><button class="caution-btn" onclick="toggleCaution(this)"><span>💰 추가 비용 안내</span><i>﹀</i></button><div class="caution-body">선상팁, 개인 용돈, 음료·주류·와이파이, 싱글차지 등은 개인 부담입니다.</div></div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -676,60 +623,20 @@ footer strong { color: rgba(255,255,255,.85); }
   </div>
 </div>
 
-<!-- 취소 및 환불 규정 모달 -->
+<!-- 환불 규정 모달 -->
 <div class="modal-bg" id="refundModal">
   <div class="modal-box" style="max-width:560px;">
     <button class="modal-close" onclick="document.getElementById('refundModal').classList.remove('open'); document.body.style.overflow='';">×</button>
     <div class="modal-title">📄 취소 및 환불 규정 안내</div>
-    <div class="modal-sub">유럽 크루즈 상품은 현지 사전 확정 조건이 포함되어 있어 일반 여행상품과 달리 취소 규정이 엄격하게 적용됩니다.</div>
-
-    <!-- 기본 환불 -->
+    <div class="modal-sub">유럽 크루즈 상품은 현지 사전 확정 조건이 포함되어 있어 취소 규정이 엄격하게 적용됩니다.</div>
     <div style="background:#F8F6F1;border-radius:8px;padding:18px 20px;margin-bottom:14px;">
       <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;">📋 지상비 기본 환불 규정</div>
-      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E5E0D5;font-size:13px;">
-        <span style="color:var(--gray);">출발 60일 전까지 취소 시</span>
-        <span style="font-weight:700;color:var(--green);">전액 환불 가능</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;padding:10px 0;font-size:13px;">
-        <span style="color:var(--gray);">출발 59일 전부터 취소 시</span>
-        <span style="font-weight:700;color:var(--red);">지상비 환불 불가</span>
-      </div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E5E0D5;font-size:13px;"><span style="color:var(--gray);">출발 60일 전까지 취소 시</span><span style="font-weight:700;color:var(--green);">전액 환불 가능</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;font-size:13px;"><span style="color:var(--gray);">출발 59일 전부터 취소 시</span><span style="font-weight:700;color:var(--red);">지상비 환불 불가</span></div>
     </div>
-
-    <!-- 현지 예약 조건 -->
-    <div style="background:#FFF8EC;border:1px solid var(--gold);border-radius:8px;padding:18px 20px;margin-bottom:14px;">
-      <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;">🌍 유럽 현지 예약 별도 조건</div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid #E8D5B0;font-size:13px;gap:12px;">
-        <span style="color:var(--gray);flex:1;">관광지 입장권 발권 이후 취소 시</span>
-        <span style="font-weight:700;color:var(--red);white-space:nowrap;">100% 취소 수수료</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid #E8D5B0;font-size:13px;gap:12px;">
-        <span style="color:var(--gray);flex:1;">차량·레스토랑·호텔<br><small style="color:#aaa;">출발 최소 45일 전까지 취소 요청 시</small></span>
-        <span style="font-weight:700;color:var(--green);white-space:nowrap;">무료 취소 가능</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;font-size:13px;gap:12px;">
-        <span style="color:var(--gray);flex:1;">차량·레스토랑·호텔<br><small style="color:#aaa;">45일 이후 취소 시</small></span>
-        <span style="font-weight:700;color:var(--red);white-space:nowrap;">실비 기준 수수료 발생</span>
-      </div>
-    </div>
-
-    <!-- 안내 -->
-    <div style="background:#EEF2FA;border-radius:8px;padding:14px 18px;font-size:13px;color:var(--navy);line-height:1.75;margin-bottom:20px;">
-      💡 본 상품은 <strong>현지 사전 결제 및 확정 방식</strong>으로 진행되므로<br>
-      일정 확정 후 예약을 권장드립니다.
-    </div>
-
-    <a href="http://pf.kakao.com/_EgXxbb" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;gap:8px;
-              background:#FEE500;color:#1a1a1a;font-weight:700;font-size:15px;
-              padding:14px;border-radius:8px;text-decoration:none;margin-bottom:10px;">
-      💬 카카오톡으로 문의하기
-    </a>
-    <button onclick="document.getElementById('refundModal').classList.remove('open'); document.body.style.overflow='';"
-       style="width:100%;padding:12px;border-radius:8px;border:1px solid #D5CFC4;
-              background:white;color:var(--gray);font-size:14px;cursor:pointer;">
-      닫기
-    </button>
+    <div style="background:#EEF2FA;border-radius:8px;padding:14px 18px;font-size:13px;color:var(--navy);line-height:1.75;margin-bottom:20px;">💡 본 상품은 <strong>현지 사전 결제 및 확정 방식</strong>으로 진행되므로 일정 확정 후 예약을 권장드립니다.</div>
+    <a href="http://pf.kakao.com/_EgXxbb" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#FEE500;color:#1a1a1a;font-weight:700;font-size:15px;padding:14px;border-radius:8px;text-decoration:none;margin-bottom:10px;">💬 카카오톡으로 문의하기</a>
+    <button onclick="document.getElementById('refundModal').classList.remove('open'); document.body.style.overflow='';" style="width:100%;padding:12px;border-radius:8px;border:1px solid #D5CFC4;background:white;color:var(--gray);font-size:14px;cursor:pointer;">닫기</button>
   </div>
 </div>
 
@@ -745,33 +652,11 @@ footer strong { color: rgba(255,255,255,.85); }
     <div class="modal-title">예약 전 확인사항</div>
     <div class="modal-sub">예약 전 아래 3가지 사항을 반드시 확인해 주세요.</div>
     <div class="agree-items">
-      <div class="agree-item" id="agree1" onclick="toggleAgree(1)">
-        <div class="agree-chk" id="chk1">✓</div>
-        <div class="agree-text">
-          <div class="atitle">📌 커뮤니티 동행 상품 안내</div>
-          <div class="adesc">본 상품은 여행사 상품이 아닌 <strong>커뮤니티 동행 프로그램</strong>입니다. 크루즈 전문가와 연결하여 도움을 드리는 역할을 하며, 일반 여행사 서비스와 다를 수 있음을 이해합니다.</div>
-        </div>
-      </div>
-      <div class="agree-item" id="agree2" onclick="toggleAgree(2)">
-        <div class="agree-chk" id="chk2">✓</div>
-        <div class="agree-text">
-          <div class="atitle">🚢 크루즈 예약 취소·환불 불가</div>
-          <div class="adesc">크루즈 요금은 <span class="red">예약 즉시 변경 및 환불이 불가</span>합니다. 객실 등급, 인원, 일정을 충분히 검토 후 신중하게 선택해 주시기 바랍니다.</div>
-        </div>
-      </div>
-      <div class="agree-item" id="agree3" onclick="toggleAgree(3)">
-        <div class="agree-chk" id="chk3">✓</div>
-        <div class="agree-text">
-          <div class="atitle">✈️ 항공 및 지상비 환불 규정</div>
-          <div class="adesc"><strong>항공</strong>은 항공사 규정에 따라 환불됩니다.<br><strong>여행경비</strong>는 출발 <strong>60일 전까지 100% 환불</strong> 가능하며, 출발 <span class="red">59일 이전부터는 환불 불가</span>합니다.</div>
-        </div>
-      </div>
+      <div class="agree-item" id="agree1" onclick="toggleAgree(1)"><div class="agree-chk" id="chk1">✓</div><div class="agree-text"><div class="atitle">📌 커뮤니티 동행 상품 안내</div><div class="adesc">본 상품은 여행사 상품이 아닌 <strong>커뮤니티 동행 프로그램</strong>입니다.</div></div></div>
+      <div class="agree-item" id="agree2" onclick="toggleAgree(2)"><div class="agree-chk" id="chk2">✓</div><div class="agree-text"><div class="atitle">🚢 크루즈 예약 취소·환불 불가</div><div class="adesc">크루즈 요금은 <span class="red">예약 즉시 변경 및 환불이 불가</span>합니다.</div></div></div>
+      <div class="agree-item" id="agree3" onclick="toggleAgree(3)"><div class="agree-chk" id="chk3">✓</div><div class="agree-text"><div class="atitle">✈️ 항공 및 지상비 환불 규정</div><div class="adesc"><strong>여행경비</strong>는 출발 <strong>60일 전까지 100% 환불</strong> 가능하며, 출발 <span class="red">59일 이전부터는 환불 불가</span>합니다.</div></div></div>
     </div>
-    <!-- 전체동의 -->
-    <div class="agree-all" id="agreeAll" onclick="toggleAll()">
-      <div class="agree-all-chk" id="chkAll">✓</div>
-      <div class="agree-all-label">✅ 위 3가지 사항에 모두 동의합니다</div>
-    </div>
+    <div class="agree-all" id="agreeAll" onclick="toggleAll()"><div class="agree-all-chk" id="chkAll">✓</div><div class="agree-all-label">✅ 위 3가지 사항에 모두 동의합니다</div></div>
     <p class="agree-note" id="agreeNote">내용을 확인하신 후 동의해주시면 다음 단계로 진행됩니다 😊</p>
     <button class="modal-confirm" id="confirmBtn" disabled onclick="goContact()">이해했습니다, 예약 문의하기</button>
   </div>
@@ -784,7 +669,6 @@ function toggleCaution(btn) {
   body.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);
 }
-
 function showTab(id, btn) {
   document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
@@ -804,7 +688,6 @@ document.getElementById('reserveModal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
 const checked = {1:false, 2:false, 3:false};
-
 function updateConfirmState() {
   const all = checked[1] && checked[2] && checked[3];
   const btn = document.getElementById('confirmBtn');
@@ -818,14 +701,12 @@ function updateConfirmState() {
   note.textContent = all ? '모두 확인해 주셨네요! 아래 버튼을 눌러 예약 문의를 시작해보세요 🎉' : '내용을 확인하신 후 동의해주시면 다음 단계로 진행됩니다 😊';
   note.style.color = all ? 'var(--green)' : '';
 }
-
 function toggleAgree(n) {
   checked[n] = !checked[n];
   document.getElementById('agree'+n).classList.toggle('checked', checked[n]);
   document.getElementById('chk'+n).style.color = checked[n] ? 'white' : 'transparent';
   updateConfirmState();
 }
-
 function toggleAll() {
   const all = checked[1] && checked[2] && checked[3];
   const newVal = !all;
