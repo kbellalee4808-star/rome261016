@@ -187,10 +187,8 @@ nav {
 .meet-time { font-size: var(--fs-lg); font-weight: 700; color: var(--gold-light); }
 
 /* PRICING TABS */
-.pricing-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
-.pricing-tabs::-webkit-scrollbar { height: 4px; }
-.pricing-tabs::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 2px; }
-.ptab { padding: 12px 28px; border-radius: 100px; border: 2px solid #D5CFC4; font-size: var(--fs-base); font-weight: 600; cursor: pointer; background: white; color: var(--gray); transition: all .2s; white-space: nowrap; flex-shrink: 0; }
+.pricing-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+.ptab { padding: 12px 28px; border-radius: 100px; border: 2px solid #D5CFC4; font-size: var(--fs-base); font-weight: 600; cursor: pointer; background: white; color: var(--gray); transition: all .2s; }
 .ptab.active, .ptab:hover { background: var(--navy); color: white; border-color: var(--navy); }
 .pricing-panel { display: none; }
 .pricing-panel.active { display: block; }
@@ -313,13 +311,6 @@ footer strong { color: rgba(255,255,255,.85); }
   /* 모바일에서 영상 배경 폴백 */
   .hero-video-wrap { display: none; }
   .hero { background: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=85') center/cover no-repeat; }
-  /* 일정 테이블 모바일 가독성 */
-  .sch-table tbody td { font-size: 13px; padding: 12px 10px; }
-  .sch-table thead th { font-size: 12px; padding: 12px 10px; }
-  .sch-table tbody td small { font-size: 11px !important; }
-  .day-num { font-size: var(--fs-base) !important; }
-  /* 가격 탭 버튼 모바일 */
-  .ptab { padding: 10px 20px; font-size: 15px; }
 }
 </style>
 </head>
@@ -426,7 +417,7 @@ footer strong { color: rgba(255,255,255,.85); }
       <thead><tr><th>일차</th><th>날짜</th><th>기항지</th><th>도착</th><th>출발</th></tr></thead>
       <tbody>
         <tr><td><span class="day-num">D1</span></td><td>10/16 금</td><td>🇰🇷 <span class="port-name">인천 출발</span></td><td>—</td><td><span class="tbadge">17:45</span></td></tr>
-        <tr><td><span class="day-num">D2</span></td><td>10/17 토</td><td>🇮🇹 <span class="port-name">로마 도착 · 오르비에토 투어</span><br><small style="color:var(--gray);font-size:13px;">• 오르비에토 푸니쿨라 탑승<br>• 구시가지 · 두오모(외관) · 시계탑<br>• 카엔광장 · 산 파트리치오 우물<br>• 아씨시 구시가지 · 산 프란체스코 성당<br>• 로카 마조레 아씨시 전경<br>저녁 로마 귀환 · 호텔 체크인</small></td><td><span class="tbadge">로마 06:25</span></td><td>—</td></tr>
+        <tr class="sea-row"><td><span class="day-num" style="color:var(--gray)">D2</span></td><td>10/17 토</td><td>✈️ 아부다비 경유 이동일</td><td><span class="tbadge">로마 06:25</span></td><td>—</td></tr>
         <tr><td><span class="day-num">D3</span></td><td>10/18 일</td><td>🇮🇹 <span class="port-name">로마 (치비타베키아) · 승선</span></td><td>—</td><td><span class="tbadge">19:00</span></td></tr>
         <tr><td><span class="day-num">D4</span></td><td>10/19 월</td><td>🇮🇹 <span class="port-name">팔레르모 (시칠리아)</span></td><td><span class="tbadge">11:00</span></td><td><span class="tbadge">20:00</span></td></tr>
         <tr class="sea-row"><td><span class="day-num" style="color:var(--gray)">D5</span></td><td>10/20 화</td><td>🌊 전일 해상일</td><td>—</td><td>—</td></tr>
@@ -434,7 +425,7 @@ footer strong { color: rgba(255,255,255,.85); }
         <tr><td><span class="day-num">D7</span></td><td>10/22 목</td><td>🇪🇸 <span class="port-name">바르셀로나 (스페인)</span></td><td><span class="tbadge">09:00</span></td><td><span class="tbadge">19:00</span></td></tr>
         <tr><td><span class="day-num">D8</span></td><td>10/23 금</td><td>🇫🇷 <span class="port-name">마르세유 (프랑스)</span></td><td><span class="tbadge">09:00</span></td><td><span class="tbadge">18:00</span></td></tr>
         <tr><td><span class="day-num">D9</span></td><td>10/24 토</td><td>🇮🇹 <span class="port-name">제노아 (이탈리아)</span></td><td><span class="tbadge">09:00</span></td><td><span class="tbadge">18:00</span></td></tr>
-        <tr><td><span class="day-num">D10</span></td><td>10/25 일</td><td>🇮🇹 <span class="port-name">로마 입항 · 로마 투어</span><br><small style="color:var(--gray);font-size:13px;">• 포로 로마노 (고대 로마 유적)<br>• 콜로세움<br>• 트레비 분수<br>공항 이동 → EY084 22:00 출발</small></td><td>—</td><td><span class="tbadge">22:00</span></td></tr>
+        <tr class="sea-row"><td><span class="day-num" style="color:var(--gray)">D10</span></td><td>10/25 일</td><td>🇮🇹 로마 → 아부다비 → 인천</td><td>—</td><td><span class="tbadge">22:00</span></td></tr>
         <tr><td><span class="day-num">D11</span></td><td>10/26 월</td><td>🇰🇷 <span class="port-name">인천 도착 · 여행 종료</span></td><td><span class="tbadge">21:55</span></td><td>—</td></tr>
       </tbody>
     </table>
@@ -521,7 +512,7 @@ footer strong { color: rgba(255,255,255,.85); }
         <div class="price-card featured"><div class="pc-badge">추천</div><div class="pc-type">Balcony</div><div class="pc-name">발코니</div><div class="pc-price"><span>$</span>3,400~</div><div class="pc-krw">약 250만원~</div><div class="pc-desc">전용 발코니 포함<br>지중해 뷰 만끽</div></div>
         <div class="price-card"><div class="pc-type">Suite</div><div class="pc-name">스위트</div><div class="pc-price"><span>$</span>5,000~</div><div class="pc-krw">약 375만원~</div><div class="pc-desc">최상위 등급 객실<br>프리미엄 서비스 포함</div></div>
       </div>
-      <p class="price-note">※ 2인 1실 기준 1인 요금 &nbsp;|&nbsp; 요트클럽 별도 문의 &nbsp;|&nbsp; 싱글차지 별도 문의<br><strong style="color:var(--red); font-size:var(--fs-base);">🎟️ 멤버십 회원 최대 50% 할인 예약 가능</strong></p>
+      <p class="price-note">※ 2인 1실 기준 1인 요금 &nbsp;|&nbsp; 요트클럽 $3,000~ 별도 &nbsp;|&nbsp; 싱글차지 별도 문의</p>
     </div>
     <div class="pricing-panel" id="tab-flight2">
       <div class="single-price-grid">
