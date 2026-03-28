@@ -510,6 +510,47 @@ footer strong { color: rgba(255,255,255,.85); }
     <span class="sec-tag">요금 안내</span>
     <h2 class="sec-title">가격 <em>안내</em></h2>
     <p class="sec-desc" style="margin-bottom:32px;">크루즈 · 항공 · 지상비를 항목별로 확인하세요.</p>
+
+    <!-- 클릭 유도 카드 버튼 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;">
+      <button onclick="showTab('cruise', document.querySelectorAll('.ptab')[0])"
+        style="background:linear-gradient(135deg,var(--navy),#2a4080);color:white;border:none;border-radius:12px;
+               padding:22px 16px;cursor:pointer;text-align:center;transition:all .2s;box-shadow:0 4px 16px rgba(27,43,75,.2);"
+        onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(27,43,75,.3)'"
+        onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 16px rgba(27,43,75,.2)'">
+        <div style="font-size:32px;margin-bottom:10px;">🚢</div>
+        <div style="font-size:var(--fs-md);font-weight:700;margin-bottom:4px;">크루즈</div>
+        <div style="font-size:var(--fs-xs);opacity:.7;">객실 타입 · 요금 확인</div>
+        <div style="margin-top:12px;background:rgba(255,255,255,.15);border-radius:100px;padding:6px 16px;font-size:var(--fs-xs);font-weight:600;">
+          탭 열기 →
+        </div>
+      </button>
+      <button onclick="showTab('flight2', document.querySelectorAll('.ptab')[1])"
+        style="background:linear-gradient(135deg,#1a6fa8,#3498db);color:white;border:none;border-radius:12px;
+               padding:22px 16px;cursor:pointer;text-align:center;transition:all .2s;box-shadow:0 4px 16px rgba(52,152,219,.2);"
+        onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(52,152,219,.35)'"
+        onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 16px rgba(52,152,219,.2)'">
+        <div style="font-size:32px;margin-bottom:10px;">✈️</div>
+        <div style="font-size:var(--fs-md);font-weight:700;margin-bottom:4px;">항공</div>
+        <div style="font-size:var(--fs-xs);opacity:.7;">에티하드 EY · 발권 안내</div>
+        <div style="margin-top:12px;background:rgba(255,255,255,.15);border-radius:100px;padding:6px 16px;font-size:var(--fs-xs);font-weight:600;">
+          탭 열기 →
+        </div>
+      </button>
+      <button onclick="showTab('ground', document.querySelectorAll('.ptab')[2])"
+        style="background:linear-gradient(135deg,#b8965c,var(--gold));color:white;border:none;border-radius:12px;
+               padding:22px 16px;cursor:pointer;text-align:center;transition:all .2s;box-shadow:0 4px 16px rgba(201,169,110,.25);"
+        onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(201,169,110,.4)'"
+        onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 16px rgba(201,169,110,.25)'">
+        <div style="font-size:32px;margin-bottom:10px;">🏨</div>
+        <div style="font-size:var(--fs-md);font-weight:700;margin-bottom:4px;">지상비</div>
+        <div style="font-size:var(--fs-xs);opacity:.85;">투어 · 호텔 · 인솔</div>
+        <div style="margin-top:12px;background:rgba(255,255,255,.2);border-radius:100px;padding:6px 16px;font-size:var(--fs-xs);font-weight:600;">
+          탭 열기 →
+        </div>
+      </button>
+    </div>
+
     <div class="pricing-tabs">
       <button class="ptab active" onclick="showTab('cruise',this)">🚢 크루즈</button>
       <button class="ptab" onclick="showTab('flight2',this)">✈️ 항공</button>
@@ -720,10 +761,10 @@ footer strong { color: rgba(255,255,255,.85); }
     <h2 class="sec-title">준비물 <em>체크리스트</em></h2>
     <p style="color:var(--gray);margin-bottom:32px;font-size:var(--fs-sm);">쾌적한 크루즈 여행을 위해 미리 챙겨주세요</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #E5E0D5;border-radius:8px;overflow:hidden;">
+    <div class="ck-grid">
 
       <!-- 왼쪽 -->
-      <div style="border-right:1px solid #E5E0D5;">
+      <div class="ck-col ck-col-left">
 
         <div class="ck-item">
           <button class="ck-btn" onclick="toggleCk(this)"><span>📄 서류 / 결제</span><i>﹀</i></button>
@@ -784,7 +825,7 @@ footer strong { color: rgba(255,255,255,.85); }
       </div>
 
       <!-- 오른쪽 -->
-      <div>
+      <div class="ck-col">
 
         <div class="ck-item">
           <button class="ck-btn" onclick="toggleCk(this)"><span>👗 의상 / 개인용품</span><i>﹀</i></button>
@@ -850,6 +891,19 @@ footer strong { color: rgba(255,255,255,.85); }
 </div>
 
 <style>
+.ck-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid #E5E0D5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.ck-col-left { border-right: 1px solid #E5E0D5; }
+@media (max-width: 640px) {
+  .ck-grid { grid-template-columns: 1fr; }
+  .ck-col-left { border-right: none; border-bottom: 1px solid #E5E0D5; }
+}
 .ck-item { border-bottom: 1px solid #E5E0D5; }
 .ck-btn {
   width: 100%; display: flex; justify-content: space-between; align-items: center;
@@ -908,7 +962,15 @@ function showTab(id, btn) {
   document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  btn.classList.add('active');
+  if (btn && btn.classList && btn.classList.contains('ptab')) {
+    btn.classList.add('active');
+  } else {
+    const map = { cruise: 0, flight2: 1, ground: 2 };
+    const tabs = document.querySelectorAll('.ptab');
+    if (tabs[map[id]]) tabs[map[id]].classList.add('active');
+  }
+  // 탭 위치로 스크롤
+  document.getElementById('tab-' + id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 function openModal(e) {
   e.preventDefault();
