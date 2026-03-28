@@ -334,6 +334,7 @@ footer strong { color: rgba(255,255,255,.85); }
     <li><a href="#ports">기항지</a></li>
     <li><a href="#pricing">가격</a></li>
     <li><a href="#includes">포함사항</a></li>
+    <li><a href="#checklist">준비물</a></li>
   </ul>
   <a href="https://open.kakao.com/o/sbJudavg" target="_blank" class="nav-cta" onclick="openModal(event)">예약 문의</a>
 </nav>
@@ -659,6 +660,162 @@ footer strong { color: rgba(255,255,255,.85); }
   </div>
 </div>
 
+<!-- 준비물 -->
+<div class="sec-bg" id="checklist">
+  <div class="sec">
+    <span class="sec-tag">여행 준비</span>
+    <h2 class="sec-title">준비물 <em>체크리스트</em></h2>
+    <p style="color:var(--gray);margin-bottom:32px;font-size:var(--fs-sm);">쾌적한 크루즈 여행을 위해 미리 챙겨주세요</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #E5E0D5;border-radius:8px;overflow:hidden;">
+
+      <!-- 왼쪽 -->
+      <div style="border-right:1px solid #E5E0D5;">
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>📄 서류 / 결제</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>📘 <strong>여권 (유효기간 6개월 이상 필수)</strong></li>
+            <li>✈️ 항공권 / 크루즈 예약 확인서</li>
+            <li>💳 해외 신용카드 (비자 / 마스터)</li>
+            <li>🛡️ 해외여행자 보험 증서</li>
+            <li>💶 유로 현금 소액 (비상용)</li>
+            <li>🔖 크루즈 예약번호 · 캐빈번호 메모</li>
+            <li>카드 없을 시 현금 보증금 약 300~500달러 또는 유로로 대체 가능</li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>💊 건강 / 상비약</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>🌀 <strong>멀미약 ★ 반드시 챙기기!</strong></li>
+            <li>💊 소화제 · 두통약 · 감기약 · 해열제</li>
+            <li>🩹 상처연고 · 밴드</li>
+            <li>👁️ 인공눈물 · 마스크</li>
+            <li>💉 개인 복용약 (여분 충분히 — 캐리어/휴대품 분산)</li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>📱 앱 / 통신</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>🚢 <strong>MSC Cruise 앱 — 탑승 전 로그인 필수!</strong></li>
+            <li>🗺️ Google Maps (오프라인 다운 권장)</li>
+            <li>🌐 Google 번역 / ChatGPT</li>
+            <li>🚗 Uber / Grab (기항지 이동용)</li>
+            <li>해외 로밍 신청 / 출국 전 데이터 통신 차단</li>
+            <li>SK 02-6343-9000 / KT 02-2190-0901 / LGT 02-3416-7010</li>
+            <li>선내 와이파이 별도 신청 (룸당 1인 권장)</li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>🧳 수하물</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>1인당 위탁 수하물 1개 권장</li>
+            <li>무게 23kg 초과 자제 (승무원 직접 운반)</li>
+            <li>표준 사이즈 권장 (객실 침대 밑·옷장 보관 고려)</li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item" style="border-bottom:none;">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>🚫 반입금지</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>대형 알코올 · 드론 · 긴 멀티탭</li>
+            <li>폭발물 / 독성물질 / 인화성 물질 / 도검류 / 총기류</li>
+            <li>주류는 1병까지만 가능 (초과 엄격 금지)</li>
+            <li>진공포장되지 않은 음식물</li>
+          </ul></div>
+        </div>
+
+      </div>
+
+      <!-- 오른쪽 -->
+      <div>
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>👗 의상 / 개인용품</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>👔 <strong>포멀 웨어 — 갈라 디너용 (필수!)</strong></li>
+            <li>남: 셔츠 정장 · 넥타이 또는 턱시도</li>
+            <li>여: 원피스 / 블라우스 (한복 유용)</li>
+            <li>👙 비치웨어 / 수영복</li>
+            <li>👟 운동화 · 샌들 · 드레스 슈즈</li>
+            <li>🕶️ 썬크림 · 모자 · 선글라스</li>
+            <li>☂️ 경량 우산</li>
+            <li>🧣 얇은 재킷 (선내 18–20°C)</li>
+            <li>화장품 · 빗 · 면도기</li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>🍜 음식 / 간식</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>🍜 컵라면 · 튜브 고추장 (취향)</li>
+            <li>🥃 미니 소주 (종이팩) — 반입 가능</li>
+            <li>🍬 과자 / 사탕 (간식용)</li>
+            <li>🫙 볶음 김치 통조림 (취향)</li>
+            <li>개인 취향에 따라 준비 / 선사 반입 기준 확인</li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>💱 환전</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>현지 화폐 (유로)</li>
+            <li>(카지노 이용 시) 미국 달러</li>
+            <li>한국 원화 사용 불가</li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>🎒 가방 / 기타</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>👜 앞으로 메는 소형 가방 (소매치기 방지)</li>
+            <li>🧺 접는 천가방 (마지막날 짐 정리용)</li>
+            <li>🫗 텀블러 (물 담는 용기)</li>
+            <li>🔌 멀티 어댑터 (110V · 220V)</li>
+            <li>🧴 치약 · 칫솔 (샴푸 등은 선내 제공)</li>
+            <li>📰 <strong>선상신문 매일 확인 &amp; 방 키 항상 소지!</strong></li>
+          </ul></div>
+        </div>
+
+        <div class="ck-item" style="border-bottom:none;">
+          <button class="ck-btn" onclick="toggleCk(this)"><span>⚡ 전기 / 보안</span><i>﹀</i></button>
+          <div class="ck-body"><ul>
+            <li>전기 110V · 220V (멀티 어댑터 필수)</li>
+            <li>드라이어 · 커피포트는 선내 제공</li>
+            <li>공항과 유사한 보안 검색 진행</li>
+            <li>긴 멀티탭 반입 불가 / 액체·주류 반입 규정 선사별 상이</li>
+            <li>드론 반입 불가</li>
+          </ul></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.ck-item { border-bottom: 1px solid #E5E0D5; }
+.ck-btn {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 22px; background: white; border: none; cursor: pointer;
+  font-size: var(--fs-sm); font-weight: 600; color: var(--navy); text-align: left;
+  transition: background .2s;
+}
+.ck-btn:hover { background: #FBF9F5; }
+.ck-btn.open { color: var(--gold); background: #FFFDF6; border-bottom: 1px solid #E5E0D5; }
+.ck-btn i { font-style: normal; font-size: 18px; color: var(--gray); transition: transform .3s; flex-shrink: 0; }
+.ck-btn.open i { transform: rotate(180deg); color: var(--gold); }
+.ck-body { display: none; padding: 14px 22px 18px; background: white; }
+.ck-body.open { display: block; animation: fadeDown .2s ease; }
+.ck-body ul { list-style: none; padding: 0; }
+.ck-body ul li { padding: 6px 0 6px 16px; position: relative; color: var(--gray); font-size: var(--fs-xs); line-height: 1.6; border-bottom: 1px solid #F3F0EA; }
+.ck-body ul li:last-child { border-bottom: none; }
+.ck-body ul li::before { content: '·'; position: absolute; left: 0; color: var(--gold); font-size: 1.4rem; line-height: 1; }
+</style>
+
 <footer>
   <strong>MSC SEAVIEW · 서부 지중해 크루즈</strong><br>
   2026.10.16 – 10.26 &nbsp;|&nbsp; 8박 11일 &nbsp;|&nbsp; 이탈리아 · 스페인 · 프랑스
@@ -683,6 +840,12 @@ footer strong { color: rgba(255,255,255,.85); }
 
 <script>
 function toggleCaution(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+function toggleCk(btn) {
   const body = btn.nextElementSibling;
   const isOpen = body.classList.contains('open');
   body.classList.toggle('open', !isOpen);
